@@ -1,0 +1,14 @@
+[Unit]
+Description=pi-monitor
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/opt/pi-monitor/pi-monitor.sh
+ExecStop=/bin/kill -TERM $MAINPID
+
+PrivateTmp=false
+
+[Install]
+WantedBy=multi-user.target
+

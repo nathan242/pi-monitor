@@ -1,0 +1,27 @@
+.container {
+
+}
+
+.left_column {
+    float: left;
+}
+
+.right_column {
+    display: grid;
+}
+
+.video_panel {
+    border: black;
+    border-style: solid;
+}
+
+.data_panel {
+    border: black;
+    border-style: solid;
+}
+
+.control_panel {
+    border: black;
+    border-style: solid;
+}
+
