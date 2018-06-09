@@ -8,6 +8,7 @@ import signal
 import subprocess
 import Adafruit_SSD1306
 import Adafruit_MCP9808.MCP9808
+import brightpi.brightpilib
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
@@ -61,6 +62,7 @@ def exit_handler(signum, frame):
             if count > 5:
                 picam_proc.kill()
 
+    light.reset()
     display.display()
     shutil.rmtree(run_dir)
     sys.exit(0)
@@ -93,13 +95,17 @@ except:
 
 temp_sensor = Adafruit_MCP9808.MCP9808.MCP9808()
 display = Display()
+light = brightpi.brightpilib.BrightPi()
 
 temp_sensor.begin()
+light.reset()
 
 picam_service = False
 picam_running = False
 led_bri = False
 led_ir = False
+led_bri_running = False
+led_ir_running = False
 temp = False
 
 # Exit signal handling
@@ -143,6 +149,19 @@ while True:
             picam_running = False
 
     # Control LED's
+    if led_bri and not led_bri_running:
+        light.set_led_on_off(brightpi.brightpilib.LED_WHITE, brightpi.brightpilib.ON)
+        led_bri_running = True
+    elif not led_bri and led_bri_running:
+        light.set_led_on_off(brightpi.brightpilib.LED_WHITE, brightpi.brightpilib.OFF)
+        led_bri_running = False
+
+    if led_ir and not led_ir_running:
+        light.set_led_on_off(brightpi.brightpilib.LED_IR, brightpi.brightpilib.ON)
+        led_ir_running = True
+    elif not led_ir and led_ir_running:
+        light.set_led_on_off(brightpi.brightpilib.LED_IR, brightpi.brightpilib.OFF)
+        led_ir_running = False
 
     # Read temperature
     temp = temp_sensor.readTempC()

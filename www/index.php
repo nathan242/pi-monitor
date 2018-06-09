@@ -10,7 +10,7 @@
     <div class="container">
       <div class="left_column">
         <div class="video_panel">
-          <video src="hls/index.m3u8" width="<?php echo $video_x; ?>" height="<?php echo $video_y; ?>" controls="controls">VIDEO</video>
+          <video src="hls/index.m3u8" width="<?php echo $video_x; ?>" height="<?php echo $video_y; ?>" controls="controls" autoplay>VIDEO</video>
         </div>
       </div>
       <div class="right_column">
